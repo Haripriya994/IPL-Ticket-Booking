@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPL Ticket Booking Form</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>IPL Ticket Booking</h1>
+        <p>Book Your Favourite Match Tickets!</p>
+    </header>
+
+    <section>
+        <h2>Ticket Booking Form</h2>
+
+        <form>
+
+            <label>Name:</label><br>
+            <input type="text" name="name"
+                   placeholder="Enter your name"
+                   minlength="3" maxlength="30" required>
+            <br><br>
+
+            <label>Email:</label><br>
+            <input type="email" name="email"
+                   placeholder="Enter your email" required>
+            <br><br>
+
+            <label>Phone Number:</label><br>
+            <input type="tel" name="phone"
+                   placeholder="Enter 10 digit number"
+                   pattern="[0-9]{10}" required>
+            <br><br>
+
+            <label>Select Match:</label><br>
+            <select name="match" required>
+                <option value="">Choose a match</option>
+                <option>RCB vs CSK</option>
+                <option>MI vs KKR</option>
+                <option>SRH vs RR</option>
+            </select>
+            <br><br>
+
+            <label>Stand Category:</label><br>
+            <select name="stand" required>
+                <option value="">Choose a stand</option>
+                <option>General</option>
+                <option>Premium</option>
+                <option>VIP</option>
+            </select>
+            <br><br>
+
+            <label>Number of Tickets:</label><br>
+            <input type="number" name="tickets"
+                   min="1" max="5" required>
+            <br><br>
+
+            <label>Additional Preference:</label><br>
+            <input type="radio" name="preference" value="Near Boundary">
+            Near Boundary
+            <input type="radio" name="preference" value="Near Pavilion">
+            Near Pavilion
+            <br><br>
+
+            <button type="submit">Submit Booking</button>
+            <button type="reset">Reset</button>
+
+        </form>
+    </section>
+
+    <footer>
+        <p>Thank you for choosing IPL Ticket Booking!</p>
+    </footer>
+
+</body>
+</html>
