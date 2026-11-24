@@ -29,3 +29,66 @@ bookButtons.forEach(function(button) {
         showToast("Booking form opened!");
     });
 });
+
+// Get booking form elements
+let matchSelect = document.getElementById("matchSelect");
+let standSelect = document.getElementById("standSelect");
+let ticketQuantity = document.getElementById("ticketQuantity");
+
+// Get summary elements
+let summaryMatch = document.getElementById("summaryMatch");
+let summaryStand = document.getElementById("summaryStand");
+let summaryPrice = document.getElementById("summaryPrice");
+let summaryQuantity = document.getElementById("summaryQuantity");
+let summaryTotal = document.getElementById("summaryTotal");
+
+// Function to update booking summary
+function updateSummary() {
+
+    let match = matchSelect.value;
+    let stand = standSelect.value;
+    let quantity = Number(ticketQuantity.value);
+
+    // Set ticket prices
+    let price = 0;
+
+    if (match === "CSK vs MI") {
+        if (stand === "General") {
+            price = 800;
+        } else if (stand === "Premium") {
+            price = 1500;
+        } else {
+            price = 3000;
+        }
+    } 
+    else if (match === "RCB vs KKR") {
+        if (stand === "General") {
+            price = 1000;
+        } else if (stand === "Premium") {
+            price = 2000;
+        } else {
+            price = 4000;
+        }
+    }
+
+    // Calculate total amount
+    let total = price * quantity;
+
+    // Update booking summary
+    summaryMatch.innerText = match;
+    summaryStand.innerText = stand;
+    summaryPrice.innerText = price;
+    summaryQuantity.innerText = quantity;
+    summaryTotal.innerText = total;
+
+    // Show notification
+    showToast("Booking summary updated!");
+}
+
+// Add change event listeners
+matchSelect.addEventListener("change", updateSummary);
+standSelect.addEventListener("change", updateSummary);
+ticketQuantity.addEventListener("change", updateSummary);
+
+// Update summary when quantity is typed
+ticketQuantity.addEventListener("input", updateSummary);

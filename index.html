@@ -100,54 +100,65 @@
 
     <h2 id="booking">Ticket Booking Form</h2>
 
-    <form>
-        Match:
-        <select>
-            <option>CSK vs MI</option>
-            <option>RCB vs KKR</option>
-        </select>
+   
+<form id="bookingForm">
+    Match:
+    <select id="matchSelect">
+        <option value="CSK vs MI">CSK vs MI</option>
+        <option value="RCB vs KKR">RCB vs KKR</option>
+    </select>
 
-        <br><br>
+    <br><br>
 
-        Stand Category:
-        <select>
-            <option>General</option>
-            <option>Premium</option>
-            <option>VIP</option>
-        </select>
+    Stand Category:
+    <select id="standSelect">
+        <option value="General">General</option>
+        <option value="Premium">Premium</option>
+        <option value="VIP">VIP</option>
+    </select>
 
-        <br><br>
+    <br><br>
 
-        Number of Tickets:
-        <input type="number">
+    Number of Tickets:
+    <input type="number" id="ticketQuantity" value="1" min="1">
 
-        <br><br>
+    <br><br>
 
-        Name:
-        <input type="text">
+    Name:
+    <input type="text" id="customerName">
 
-        <br><br>
+    <br><br>
 
-        Email:
-        <input type="email">
+    Email:
+    <input type="email" id="customerEmail">
 
-        <br><br>
+    <br><br>
 
-        Phone Number:
-        <input type="tel">
+    Phone Number:
+    <input type="tel" id="customerPhone">
 
-        <br><br>
+    <br><br>
 
-        <button type="submit">Book Ticket</button>
-    </form>
+    <button type="submit">Book Ticket</button>
+</form>
+
+
+    
+<div class="booking-summary">
 
     <h3>Booking Summary</h3>
 
-    <p>Match: CSK vs MI</p>
-    <p>Stand: General</p>
-    <p>Ticket Price: Rs. 800</p>
-    <p>Quantity: 1</p>
-    <p>Total Amount: Rs. 800</p>
+    <p>Match: <span id="summaryMatch">CSK vs MI</span></p>
+
+    <p>Stand: <span id="summaryStand">General</span></p>
+
+    <p>Ticket Price: Rs. <span id="summaryPrice">800</span></p>
+
+    <p>Quantity: <span id="summaryQuantity">1</span></p>
+
+    <h3>Total Amount: Rs. <span id="summaryTotal">800</span></h3>
+
+</div>
 
     <hr>
 
