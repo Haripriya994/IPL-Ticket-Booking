@@ -1,4 +1,3 @@
-// Function to display toast notification
 function showToast(message) {
     let toast = document.getElementById("toast");
 
@@ -9,47 +8,38 @@ function showToast(message) {
         toast.style.display = "none";
     }, 3000);
 }
-
-// Select all Book buttons
 let bookButtons = document.querySelectorAll(".book-btn");
 
-// Add click event to each Book button
+
 bookButtons.forEach(function(button) {
     button.addEventListener("click", function() {
 
-        // Find the booking form
         let bookingForm = document.getElementById("booking");
 
-        // Smoothly scroll to the booking form
         bookingForm.scrollIntoView({
             behavior: "smooth"
         });
 
-        // Display notification
         showToast("Booking form opened!");
     });
 });
 
-// Get booking form elements
 let matchSelect = document.getElementById("matchSelect");
 let standSelect = document.getElementById("standSelect");
 let ticketQuantity = document.getElementById("ticketQuantity");
 
-// Get summary elements
 let summaryMatch = document.getElementById("summaryMatch");
 let summaryStand = document.getElementById("summaryStand");
 let summaryPrice = document.getElementById("summaryPrice");
 let summaryQuantity = document.getElementById("summaryQuantity");
 let summaryTotal = document.getElementById("summaryTotal");
 
-// Function to update booking summary
 function updateSummary() {
 
     let match = matchSelect.value;
     let stand = standSelect.value;
     let quantity = Number(ticketQuantity.value);
 
-    // Set ticket prices
     let price = 0;
 
     if (match === "CSK vs MI") {
@@ -71,24 +61,70 @@ function updateSummary() {
         }
     }
 
-    // Calculate total amount
     let total = price * quantity;
 
-    // Update booking summary
     summaryMatch.innerText = match;
     summaryStand.innerText = stand;
     summaryPrice.innerText = price;
     summaryQuantity.innerText = quantity;
     summaryTotal.innerText = total;
 
-    // Show notification
     showToast("Booking summary updated!");
 }
 
-// Add change event listeners
 matchSelect.addEventListener("change", updateSummary);
 standSelect.addEventListener("change", updateSummary);
 ticketQuantity.addEventListener("change", updateSummary);
 
-// Update summary when quantity is typed
 ticketQuantity.addEventListener("input", updateSummary);
+
+let matchCards = document.querySelectorAll(".match-card");
+let teamFilter = document.getElementById("teamFilter");
+
+let gridBtn = document.getElementById("gridBtn");
+let listBtn = document.getElementById("listBtn");
+
+let matchContainer = document.getElementById("matchContainer");
+
+
+teamFilter.addEventListener("change", function() {
+
+    let selectedTeam = teamFilter.value;
+
+    matchCards.forEach(function(card) {
+
+        let teams = card.getAttribute("data-teams");
+
+        if (selectedTeam === "All" || teams.includes(selectedTeam)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+    showToast("Match filter updated!");
+
+});
+gridBtn.addEventListener("click", function() {
+
+    matchContainer.classList.remove("list-view");
+    showToast("Grid view selected!");
+
+});
+listBtn.addEventListener("click", function() {
+
+    matchContainer.classList.add("list-view");
+    showToast("List view selected!");
+
+});
+let menuBtn = document.getElementById("menuBtn");
+let navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", function() {
+
+    navLinks.classList.toggle("active");
+
+    showToast("Navigation menu toggled!");
+
+});

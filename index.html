@@ -10,13 +10,24 @@
     <header>
         <h1>IPL Ticket Booking</h1>
 
-        <nav>
-            <a href="booking.html">Book Ticket</a>
-            <a href="#matches">Matches</a>
-            <a href="#booking">Book Ticket</a>
-            <a href="#mybookings">My Bookings</a>
-            <a href="#guidelines">Guidelines</a>
-        </nav>
+        <nav class="navbar">
+
+    <div class="logo">
+        IPL TICKETS
+    </div>
+
+    <button class="menu-btn" id="menuBtn">
+        ☰
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#matches">Matches</a>
+        <a href="#booking">Book Ticket</a>
+        <a href="#mybookings">My Bookings</a>
+        <a href="#guidelines">Guidelines</a>
+    </div>
+
+</nav>
     </header>
     <hr>
     <h2>Experience The Stadium Energy Live!</h2>
@@ -48,53 +59,51 @@
     <hr>
     <h2 id="matches">Match Schedule</h2>
 
-    <label>Filter by Team:</label>
+    
+<label>Filter by Team:</label>
 
-    <select>
-        <option>All Teams</option>
-        <option>CSK</option>
-        <option>MI</option>
-        <option>RCB</option>
-        <option>KKR</option>
-        <option>SRH</option>
-    </select>
+<select id="teamFilter">
+    <option value="All">All Teams</option>
+    <option value="CSK">CSK</option>
+    <option value="MI">MI</option>
+    <option value="RCB">RCB</option>
+    <option value="KKR">KKR</option>
+    <option value="SRH">SRH</option>
+</select>
+
+<button id="gridBtn">Grid View</button>
+<button id="listBtn">List View</button>
+
 
     <br><br>
 
-    <table border="1">
-        <tr>
-            <th>Match Number</th>
-            <th>Teams</th>
-            <th>Date & Time</th>
-            <th>Venue</th>
-            <th>General</th>
-            <th>Premium</th>
-            <th>VIP</th>
-            <th>Action</th>
-        </tr>
+    
+<div class="match-container" id="matchContainer">
 
-        <tr>
-            <td>1</td>
-            <td>CSK vs MI</td>
-            <td>01 May 2026, 7:00 PM</td>
-            <td>Chennai</td>
-            <td>800</td>
-            <td>1500</td>
-            <td>3000</td>
-            <td><button class="book-btn">Book</button></td>
-        </tr>
+    <div class="match-card" data-teams="CSK MI">
+        <h3>Match 1</h3>
+        <h2>CSK vs MI</h2>
+        <p>Date: 01 May 2026, 7:00 PM</p>
+        <p>Venue: Chennai</p>
+        <p>General: Rs. 800</p>
+        <p>Premium: Rs. 1500</p>
+        <p>VIP: Rs. 3000</p>
+        <button class="book-btn">Book</button>
+    </div>
 
-        <tr>
-            <td>2</td>
-            <td>RCB vs KKR</td>
-            <td>02 May 2026, 7:00 PM</td>
-            <td>Bengaluru</td>
-            <td>1000</td>
-            <td>2000</td>
-            <td>4000</td>
-            <td><button class="book-btn">Book</button></td>
-        </tr>
-    </table>
+    <div class="match-card" data-teams="RCB KKR">
+        <h3>Match 2</h3>
+        <h2>RCB vs KKR</h2>
+        <p>Date: 02 May 2026, 7:00 PM</p>
+        <p>Venue: Bengaluru</p>
+        <p>General: Rs. 1000</p>
+        <p>Premium: Rs. 2000</p>
+        <p>VIP: Rs. 4000</p>
+        <button class="book-btn">Book</button>
+    </div>
+
+</div>
+
 
     <hr>
 
@@ -164,28 +173,29 @@
 
     <h2 id="mybookings">My Ticket Bookings</h2>
 
-    <table border="1">
-        <tr>
-            <th>Match</th>
-            <th>Ticket Price</th>
-            <th>Stand Category</th>
-            <th>Number of Tickets</th>
-            <th>Total Amount</th>
-        </tr>
-    </table>
-
     <hr>
 
-    <h2 id="guidelines">Guidelines</h2>
+    
+<h2 id="guidelines">Guidelines</h2>
 
-    <h3>Ticket Verification</h3>
-    <p>Carry your ticket while entering the stadium.</p>
+<div class="guidelines-container">
 
-    <h3>ID Proof Requirement</h3>
-    <p>Carry a valid ID proof.</p>
+    <div class="guideline-card">
+        <h3>Ticket Verification</h3>
+        <p>Carry your ticket while entering the stadium.</p>
+    </div>
 
-    <h3>Prohibited Items</h3>
-    <p>Do not carry prohibited items into the stadium.</p>
+    <div class="guideline-card">
+        <h3>ID Proof Requirement</h3>
+        <p>Carry a valid ID proof.</p>
+    </div>
+
+    <div class="guideline-card">
+        <h3>Prohibited Items</h3>
+        <p>Do not carry prohibited items into the stadium.</p>
+    </div>
+
+</div>
 
     <hr>
 
