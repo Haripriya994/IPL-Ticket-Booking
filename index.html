@@ -5,16 +5,17 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+   <div id="toast" style="display:none;"></div>
 
     <header>
         <h1>IPL Ticket Booking</h1>
 
         <nav>
             <a href="booking.html">Book Ticket</a>
-            <li><a href="#matches">Matches</a></li>
-            <li><a href="#booking">Book Ticket</a></li>
-            <li><a href="#mybookings">My Bookings</a></li>
-            <li><a href="#guidelines">Guidelines</a></li>
+            <a href="#matches">Matches</a>
+            <a href="#booking">Book Ticket</a>
+            <a href="#mybookings">My Bookings</a>
+            <a href="#guidelines">Guidelines</a>
         </nav>
     </header>
     <hr>
@@ -80,7 +81,7 @@
             <td>800</td>
             <td>1500</td>
             <td>3000</td>
-            <td><a href="#booking"><button>Book</button></a></td>
+            <td><button class="book-btn">Book</button></td>
         </tr>
 
         <tr>
@@ -91,7 +92,7 @@
             <td>1000</td>
             <td>2000</td>
             <td>4000</td>
-            <td><a href="#booking"><button>Book</button></a></td>
+            <td><button class="book-btn">Book</button></td>
         </tr>
     </table>
 
@@ -180,6 +181,7 @@
     <footer>
         <p>&copy; 2026 IPL Ticket Booking. All Rights Reserved.</p>
     </footer>
+    <script src="js/app.js"></script>
 
 </body>
 </html>
