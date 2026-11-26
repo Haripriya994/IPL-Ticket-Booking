@@ -1,31 +1,33 @@
-
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import MatchCard from "./components/MatchCard";
+import { supabase } from "./supabase";
 import "./App.css";
 
 function App() {
 
-  const matches = [
-    {
-      team1: "CSK",
-      team2: "MI",
-      date: "20 April 2026",
-      venue: "Chennai"
-    },
-    {
-      team1: "RCB",
-      team2: "KKR",
-      date: "22 April 2026",
-      venue: "Bengaluru"
-    },
-    {
-      team1: "SRH",
-      team2: "RR",
-      date: "24 April 2026",
-      venue: "Hyderabad"
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchMatches();
+  }, []);
+
+  async function fetchMatches() {
+    const { data, error } = await supabase
+      .from("matches")
+      .select("*")
+      .order("id", { ascending: true });
+
+    if (error) {
+      console.error("Error fetching matches:", error.message);
+    } else {
+      setMatches(data);
     }
-  ];
+
+    setLoading(false);
+  }
 
   return (
     <div>
@@ -36,19 +38,25 @@ function App() {
       <section id="matches">
         <h1>Upcoming IPL Matches</h1>
 
-        <div className="matches-container">
+        {loading ? (
+          <p>Loading matches...</p>
+        ) : matches.length === 0 ? (
+          <p>No matches available.</p>
+        ) : (
+          <div className="matches-container">
 
-          {matches.map((match, index) => (
-            <MatchCard
-              key={index}
-              team1={match.team1}
-              team2={match.team2}
-              date={match.date}
-              venue={match.venue}
-            />
-          ))}
+            {matches.map((match) => (
+              <MatchCard
+                key={match.id}
+                team1={match.team1}
+                team2={match.team2}
+                date={match.match_date}
+                venue={match.venue}
+              />
+            ))}
 
-        </div>
+          </div>
+        )}
       </section>
 
       <section id="booking">

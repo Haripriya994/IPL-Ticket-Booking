@@ -1,130 +1,137 @@
 function showToast(message) {
-    let toast = document.getElementById("toast");
+    const toast = document.createElement("div");
 
-    toast.innerText = message;
-    toast.style.display = "block";
+    toast.className = "toast";
+    toast.textContent = message;
 
-    setTimeout(function() {
-        toast.style.display = "none";
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
     }, 3000);
 }
-let bookButtons = document.querySelectorAll(".book-btn");
 
+const bookingForm = document.getElementById("booking-form");
 
-bookButtons.forEach(function(button) {
-    button.addEventListener("click", function() {
-
-        let bookingForm = document.getElementById("booking");
-
-        bookingForm.scrollIntoView({
-            behavior: "smooth"
-        });
-
-        showToast("Booking form opened!");
+if (bookingForm && window.location.hash === "#booking-form") {
+    bookingForm.scrollIntoView({
+        behavior: "smooth"
     });
-});
 
-let matchSelect = document.getElementById("matchSelect");
-let standSelect = document.getElementById("standSelect");
-let ticketQuantity = document.getElementById("ticketQuantity");
+    showToast("Ready to book your IPL tickets!");
+}
 
-let summaryMatch = document.getElementById("summaryMatch");
-let summaryStand = document.getElementById("summaryStand");
-let summaryPrice = document.getElementById("summaryPrice");
-let summaryQuantity = document.getElementById("summaryQuantity");
-let summaryTotal = document.getElementById("summaryTotal");
+const matchSelect = document.getElementById("match");
+const standSelect = document.getElementById("stand");
+const ticketInput = document.getElementById("tickets");
 
-function updateSummary() {
+const summaryMatch = document.getElementById("summary-match");
+const summaryStand = document.getElementById("summary-stand");
+const summaryPrice = document.getElementById("summary-price");
+const summaryQuantity = document.getElementById("summary-quantity");
+const summaryTotal = document.getElementById("summary-total");
 
-    let match = matchSelect.value;
-    let stand = standSelect.value;
-    let quantity = Number(ticketQuantity.value);
+function updateBookingSummary() {
 
-    let price = 0;
-
-    if (match === "CSK vs MI") {
-        if (stand === "General") {
-            price = 800;
-        } else if (stand === "Premium") {
-            price = 1500;
-        } else {
-            price = 3000;
-        }
-    } 
-    else if (match === "RCB vs KKR") {
-        if (stand === "General") {
-            price = 1000;
-        } else if (stand === "Premium") {
-            price = 2000;
-        } else {
-            price = 4000;
-        }
+    if (!matchSelect || !standSelect || !ticketInput) {
+        return;
     }
 
-    let total = price * quantity;
+    const match = matchSelect.value;
+    const stand = standSelect.value;
+    const quantity = Number(ticketInput.value);
 
-    summaryMatch.innerText = match;
-    summaryStand.innerText = stand;
-    summaryPrice.innerText = price;
-    summaryQuantity.innerText = quantity;
-    summaryTotal.innerText = total;
+    const prices = {
+        General: 800,
+        Premium: 1500,
+        VIP: 3000
+    };
+
+    const price = prices[stand] || 0;
+    const total = price * quantity;
+
+    summaryMatch.textContent = match || "Not selected";
+    summaryStand.textContent = stand || "Not selected";
+    summaryPrice.textContent = "₹" + price;
+    summaryQuantity.textContent = quantity || 0;
+    summaryTotal.textContent = "₹" + total;
 
     showToast("Booking summary updated!");
 }
 
-matchSelect.addEventListener("change", updateSummary);
-standSelect.addEventListener("change", updateSummary);
-ticketQuantity.addEventListener("change", updateSummary);
+if (matchSelect && standSelect && ticketInput) {
 
-ticketQuantity.addEventListener("input", updateSummary);
+    matchSelect.addEventListener("change", updateBookingSummary);
 
-let matchCards = document.querySelectorAll(".match-card");
-let teamFilter = document.getElementById("teamFilter");
+    standSelect.addEventListener("change", updateBookingSummary);
 
-let gridBtn = document.getElementById("gridBtn");
-let listBtn = document.getElementById("listBtn");
+    ticketInput.addEventListener("input", updateBookingSummary);
+}
 
-let matchContainer = document.getElementById("matchContainer");
+const teamFilter = document.getElementById("team");
+const matchCards = document.querySelectorAll(".match-card");
 
+if (teamFilter) {
 
-teamFilter.addEventListener("change", function() {
+    teamFilter.addEventListener("change", function () {
 
-    let selectedTeam = teamFilter.value;
+        const selectedTeam = teamFilter.value;
 
-    matchCards.forEach(function(card) {
+        matchCards.forEach(function (card) {
 
-        let teams = card.getAttribute("data-teams");
+            const teams = card.dataset.teams.split(" ");
 
-        if (selectedTeam === "All" || teams.includes(selectedTeam)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
+            if (selectedTeam === "All" || teams.includes(selectedTeam)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
 
+        });
+
+        showToast("Match filter updated!");
+    });
+}
+
+const matchContainer = document.getElementById("match-container");
+const gridButton = document.getElementById("grid-view");
+const listButton = document.getElementById("list-view");
+
+if (matchContainer && gridButton && listButton) {
+
+    gridButton.addEventListener("click", function () {
+
+        matchContainer.classList.remove("list-view");
+
+        showToast("Grid view selected!");
     });
 
-    showToast("Match filter updated!");
+    listButton.addEventListener("click", function () {
 
-});
-gridBtn.addEventListener("click", function() {
+        matchContainer.classList.add("list-view");
 
-    matchContainer.classList.remove("list-view");
-    showToast("Grid view selected!");
+        showToast("List view selected!");
+    });
+}
 
-});
-listBtn.addEventListener("click", function() {
+const menuToggle = document.getElementById("menu-toggle");
+const navbar = document.getElementById("navbar");
 
-    matchContainer.classList.add("list-view");
-    showToast("List view selected!");
+if (menuToggle && navbar) {
 
-});
-let menuBtn = document.getElementById("menuBtn");
-let navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", function () {
 
-menuBtn.addEventListener("click", function() {
+        navbar.classList.toggle("active");
 
-    navLinks.classList.toggle("active");
+        showToast("Navigation menu toggled!");
+    });
 
-    showToast("Navigation menu toggled!");
+    navbar.querySelectorAll("a").forEach(function (link) {
 
-});
+        link.addEventListener("click", function () {
+
+            navbar.classList.remove("active");
+
+        });
+    });
+}

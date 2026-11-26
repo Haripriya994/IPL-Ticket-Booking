@@ -1,4 +1,3 @@
-
 function Hero() {
   return (
     <section className="hero" id="home">
@@ -21,4 +20,3 @@ function Hero() {
 }
 
 export default Hero;
-    
